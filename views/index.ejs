@@ -1,0 +1,60 @@
+<%- include("header.ejs")%>
+<body>
+  <div class="background"></div>
+  <div class="container">
+    <div class="upper-container row">
+      <div class="col">
+        <h1>Should You Apply Sunscreen?</h1>
+      <h2>
+        <%if(locals.content){%> 
+          <% var content = JSON.parse(content);%>
+          <%if(content.result.uv <=2){%>
+            Low risk. Sunscreen is generally not needed, but it's still good to use it 
+            if you're going to be outside for extended periods.
+          <%}else if(content.result.uv <=5){%> 
+            Moderate risk. It's recommended to wear sunscreen, especially 
+            if you're going to be outside for a significant amount of time.
+          <%}else if(content.result.uv <=7){%> 
+            High risk. You should definitely wear sunscreen and take other 
+            protective measures, such as wearing protective clothing and sunglasses.
+          <%}else if(content.result.uv <=10){%> 
+            Very high risk. Sunscreen is essential, along with other protective measures.
+          <%}else{%>
+            Extreme risk. Avoid sun exposure as much as possible, and use sunscreen along with other protective measures.
+            <%}%>
+        <%}%>
+      </h2>
+      </div>
+    </div>
+    <div class="bottom-container">
+      <form class="row g-3" action="/submit" method="POST">
+        <div class="col-lg-3">
+          <label for="house-unit" class="visually-hidden">House unit</label>
+          <input class="form-control" placeholder="House unit" name="unit" />
+        </div>
+        <div class="col-lg-9">
+          <label for="street" class="visually-hidden">Street</label>
+          <input class="form-control" placeholder="Street" name="street" />
+        </div>
+        <div class="col-lg-4">
+          <label for="city" class="visually-hidden">City</label>
+          <input class="form-control" placeholder="City" name="city" />
+        </div>
+        <div class="col-lg-4">
+          <label for="state" class="visually-hidden">State</label>
+          <input class="form-control" placeholder="State" name="state" />
+        </div>
+        <div class="col-lg-4">
+          <label for="postal-code" class="visually-hidden">Postal Code</label>
+          <input class="form-control" placeholder="Poscode" name="poscode" />
+        </div>
+
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="btn btn-primary mb-3 btn-lg">
+            Query
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
